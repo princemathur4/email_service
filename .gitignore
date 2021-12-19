@@ -1,0 +1,10 @@
+venv/
+.idea/
+/__pycache__
+*__pycache__/
+.pyc
+settings.json
+.vscode/
+config/local.py
+config/prod.py
+notes.txt
