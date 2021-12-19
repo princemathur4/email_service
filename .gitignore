@@ -1,3 +1,4 @@
+.env
 venv/
 .idea/
 /__pycache__
@@ -5,6 +6,4 @@ venv/
 .pyc
 settings.json
 .vscode/
-config/local.py
-config/prod.py
 notes.txt

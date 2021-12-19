@@ -1,5 +1,4 @@
-import os
-from app import create_app, LOCAL, PROD
+from app import create_app, PROD, LOCAL
 
 env = PROD
 app = create_app(env)

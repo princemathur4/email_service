@@ -1,20 +1,17 @@
 import os
 from flask import Flask
+from config import ENVIRONMENTS, Config, LOCAL, PROD
 from modules.exceptions import InvalidInputParameter
-
-
-LOCAL = "LOCAL"
-PROD = "PROD"
-ENVIRONMENTS = [LOCAL, PROD]
 
 
 def load_config(app: Flask, env):
     app.config["ENVIRONMENT"] = env
-    global_config_path = os.path.join(app.root_path, "config/default.py")
-    app.config.from_pyfile(global_config_path)
-
-    env_config_path = os.path.join(app.root_path, f"config/{env.lower()}.py")
-    app.config.from_pyfile(env_config_path)
+    config_classes = Config.__subclasses__()
+    for config_cls in config_classes:
+        if config_cls.__env_name__ == env:
+            app.config.from_object(config_cls)
+            return
+    raise InvalidInputParameter(f"Invalid value for env={env}")
 
 
 def create_app(env: str) -> Flask:
