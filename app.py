@@ -23,6 +23,8 @@ def create_app(env: str) -> Flask:
 
     app = Flask(__name__)
     load_config(app, env)
+    from modules.mail_service.providers.flask_mail import mail
+    mail.init_app(app)
     register_blueprints(app)
     os.environ["PROJECT_PATH"] = os.path.dirname(app.instance_path)
     print("#" * 50, f"{' ' * 10} * Environment: {env}", "#" * 50, sep='\n')
