@@ -10,13 +10,16 @@ ENVIRONMENTS = [LOCAL, PROD]
 
 
 class Config(metaclass=ABCMeta):
-
+    """
+    Acts as abstract class for env specific configs
+    Also acts as a base class which contains variables that are common among different environments
+    """
+    
     @property
     @abstractmethod
     def __env_name__(self,):
         pass
 
-    DEBUG = False
     MAIL_SERVER = 'smtp.gmail.com'
     MAIL_PORT = 465
     MAIL_USE_TLS = False
@@ -37,3 +40,5 @@ class DevelopmentConfig(Config):
 
 class ProductionConfig(Config):
     __env_name__ = PROD
+
+    DEBUG = False

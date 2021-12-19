@@ -10,11 +10,11 @@ interface_bp = Blueprint('interface', __name__)
 def send_mail():
     payload = request.json
     user_name = payload.get("user_name")
-    if not user_name:
+    if not user_name or not isinstance(user_name, str):
         raise InvalidRequestParams(internal_err_message="Invalid value for request param: 'user_name'")
 
     email = payload.get("email")
-    if not email:
+    if not email or not isinstance(email, str) or not MailServiceUtils.check_email(email=email):
         raise InvalidRequestParams(internal_err_message="Invalid value for request param: 'email'")
 
     util = MailServiceUtils()
