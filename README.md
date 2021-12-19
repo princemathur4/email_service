@@ -1,4 +1,4 @@
-# Design an Email-Service
+# Email-Service
 ## Features
 - Provides abstraction to the user between two different email service providers
 - If one of the services goes down, service can quickly fail-over to a different provider without
